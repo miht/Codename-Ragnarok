@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
+
+using Modules.UI;
 
 namespace Modules.Entity.Player {
     public class PlayerController : MonoBehaviour
@@ -15,9 +18,14 @@ namespace Modules.Entity.Player {
 
         private TargetableObject _target;
 
+        private UIView _uiCanvas;
+
+        private bool _isMouseValid;
+
         // Start is called before the first frame update
         void Start()
         {
+            _uiCanvas = GameObject.FindWithTag("Canvas").GetComponent<UIView>();
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _navMeshAgent.speed = _speed;
             _navMeshAgent.updateRotation = false;
@@ -30,18 +38,27 @@ namespace Modules.Entity.Player {
         // Update is called once per frame
         void Update()
         {
-            if(Input.GetMouseButton(0)) {
-                RaycastHit hit;
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if(Physics.Raycast(ray, out hit, 45f, LayerMask.GetMask("Terrain"))) {
-                    Transform objectHit = hit.transform;
-                    
-                    Vector3 distVector = hit.point - transform.position;
-                    distVector.y = 0;
-                    float distance = Vector3.Magnitude(distVector);
-                    if(distance >= _minimumMovementDistance) {
-                        _navMeshAgent.isStopped = false;
-                        _navMeshAgent.SetDestination(hit.point);
+            if(Input.GetMouseButton(0)) { 
+                if(Input.GetMouseButtonDown(0)) {
+                    _isMouseValid = !EventSystem.current.IsPointerOverGameObject();
+                }
+
+                if(_isMouseValid) {
+
+                    RaycastHit hit;
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    if (Physics.Raycast(ray, out hit, 45f, LayerMask.GetMask("Terrain")))
+                    {
+                        Transform objectHit = hit.transform;
+
+                        Vector3 distVector = hit.point - transform.position;
+                        distVector.y = 0;
+                        float distance = Vector3.Magnitude(distVector);
+                        if (distance >= _minimumMovementDistance)
+                        {
+                            _navMeshAgent.isStopped = false;
+                            _navMeshAgent.SetDestination(hit.point);
+                        }
                     }
                 }
             }

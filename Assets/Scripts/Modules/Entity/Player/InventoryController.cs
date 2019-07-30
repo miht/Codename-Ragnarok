@@ -6,6 +6,7 @@ namespace Modules.Entity.Player
 {
     public class InventoryController : MonoBehaviour
     {
+        public UIInventory _uiInventory;
         public int _size;
         public List<Item> _items;
 
@@ -20,6 +21,9 @@ namespace Modules.Entity.Player
 
         void Update()
         {
+            if(Input.GetKeyDown(KeyCode.I)) {
+                _uiInventory.gameObject.SetActive(!_uiInventory.gameObject.activeSelf);
+            }
         }
 
         public void AddItem(Item item)
