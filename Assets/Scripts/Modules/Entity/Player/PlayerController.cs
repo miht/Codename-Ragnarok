@@ -74,7 +74,6 @@ namespace Modules.Entity.Player {
                     if (tarObj != null)
                     {
                         _navMeshAgent.isStopped = false;
-                        Debug.Log("PlayerController: Targetable object hit");
                         _navMeshAgent.SetDestination(targetableObjectHit.position);
                         _target = tarObj;
                     }
@@ -89,12 +88,10 @@ namespace Modules.Entity.Player {
         }
 
         void OnTriggerEnter(Collider other) {
-            Debug.Log(other.gameObject.name);
             if (_target != null && _target == other.gameObject.GetComponent<TargetableObject>())
             {
                 _navMeshAgent.isStopped = true;
                 _target = null;
-                Debug.Log("PlayerController: Target reached.");
 
                 //Check if it was an item that we collided with
                 ObtainableObject obtObject = other.GetComponent<ObtainableObject>();

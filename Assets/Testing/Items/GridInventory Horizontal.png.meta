@@ -9,6 +9,7 @@ TextureImporter:
     21300008: 1x1
     21300010: 3x2
     21300012: 16x2
+    21300014: 3x1
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -248,6 +249,26 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: bedbe744ebd242a488a32dd190a8a1bf
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3x1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 193
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f4c702f93b0db848a1819ee842e3e44
       vertices: []
       indices: 
       edges: []

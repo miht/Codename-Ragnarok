@@ -8,7 +8,8 @@ public class Armor : Equippable
         Chest,
         Hands,
         Waist,
-        Feet
+        Feet,
+        Finger
     }
 
     public ArmorTypes _armorType;

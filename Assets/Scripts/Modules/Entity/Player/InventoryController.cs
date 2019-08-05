@@ -6,6 +6,7 @@ namespace Modules.Entity.Player
 {
     public class InventoryController : MonoBehaviour
     {
+        public ObtainableObject _obtainableObjectPrefab;
         public UIInventory _uiInventory;
         public int _size;
         public List<Item> _items;
@@ -31,6 +32,7 @@ namespace Modules.Entity.Player
             try
             {
                 _items.Add(item);
+                _uiInventory.AddItem(item, RemoveItem);
             }
             catch (ArgumentOutOfRangeException)
             {
@@ -40,7 +42,12 @@ namespace Modules.Entity.Player
 
         public void RemoveItem(Item item)
         {
-            _items.Remove(item);
+            Vector3 spawnPos = transform.position;
+            spawnPos.y = 0f;
+            ObtainableObject o = Instantiate(_obtainableObjectPrefab, spawnPos, Quaternion.identity);
+            o._item = item;
+            
+            _items.Remove(item);   
         }
 
         public bool ContainsItem(Item item)
