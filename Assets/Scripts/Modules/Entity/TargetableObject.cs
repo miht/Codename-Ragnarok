@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class TargetableObject : MonoBehaviour
 {
+
+    public enum TargetableObjectTypes {
+        Obtainable,
+        SomethingElseYo
+    }
+    protected TargetableObjectTypes _targetableObjectType;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +20,10 @@ public class TargetableObject : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public TargetableObjectTypes TargetableObjectType {
+        get { return _targetableObjectType;}
+        set {_targetableObjectType = value;}
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,8 @@ namespace Modules.UI
         private RectTransform _rect;
 
         private bool _isFocused;
+
+        public UIBackpack _uiBackpack;
 
         void Start() {
             _rect = GetComponent<RectTransform>();
@@ -25,6 +28,10 @@ namespace Modules.UI
 
         public bool IsFocused() {
             return _isFocused;
+        }
+
+        public void OnClick() {
+
         }
     }
 }

@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 public class UIItem : MonoBehaviour
 {
+    private Item _item;
     private bool _isDragging;
+
+    private Action _dropAction;
 
     private bool _isValid = true;
 
@@ -38,12 +41,13 @@ public class UIItem : MonoBehaviour
         UIUtilities.DebugRect(_rect.rect, Color.green);
     }
 
-    public void Initialize(Vector2Int dimensions, Sprite thumb, Item.RaretyTypes rarety) {
-        _dimensions = dimensions;
-        _image.sprite = thumb;
+    public void Initialize(Item item, Action dropAction) {
+        _item = item;
+        _dimensions = _item._uiDimensions;
+        _image.sprite = _item.UISprite;
 
         _backgroundImage = GetComponent<Image>();
-        _backgroundColor = Item._raretyColors[rarety];
+        _backgroundColor = Item._raretyColors[_item.Rarety];
         _backgroundColor.a = 0.15f;
         _backgroundImage.color = _backgroundColor;
 
@@ -54,13 +58,23 @@ public class UIItem : MonoBehaviour
         _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
 
         _rect = GetComponent<RectTransform>();
-        float width = dimensions.x * 64;
-        float height = dimensions.y * 64;
+        float width = _dimensions.x * 64;
+        float height = _dimensions.y * 64;
         _rect.sizeDelta = new Vector2(width, height);
 
         _collider = gameObject.AddComponent<BoxCollider2D>();
         _collider.size = _rect.rect.size - _colliderMargins;
         _collider.isTrigger = true;
+
+        _dropAction = dropAction;
+    }
+
+    public Action GetDropAction() {
+        return _dropAction;
+    }
+
+    public Item GetItem() {
+        return _item;
     }
 
     public Vector2Int GetDimensions() {
@@ -69,7 +83,6 @@ public class UIItem : MonoBehaviour
 
     public void SetDragged(bool value) {
         Dragging = value;
-        // _rigidbody.simulated = value;
     }
 
     public void SetValid(bool value) {

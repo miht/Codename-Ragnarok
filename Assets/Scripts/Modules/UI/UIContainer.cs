@@ -16,17 +16,12 @@ public class UIContainer : MonoBehaviour
         _rect = GetComponent<RectTransform>();
     }
 
-    public virtual void Initialize(Action onClick) {
-        _button = GetComponent<Button>();
-        _button.onClick.AddListener(() => {
-            onClick();
-        });
+    public virtual void Initialize() {
     }
 
     // Update is called once per frame
     void Update()
     {
-        UIUtilities.DebugRect(_rect.rect, Color.green);
     }
 
     public virtual UIItem ReplaceItem(UIItem item) {
@@ -36,7 +31,9 @@ public class UIContainer : MonoBehaviour
     }
 
     public virtual bool IsItemInside(UIItem item) {
-        return RectTransformUtility.RectangleContainsScreenPoint(_rect, Input.mousePosition);
+        if(item == null)
+            return RectTransformUtility.RectangleContainsScreenPoint(_rect, Input.mousePosition);
+        return RectTransformUtility.RectangleContainsScreenPoint(_rect, item.transform.position);
     }
 
     public virtual void AddItem(UIItem item) {

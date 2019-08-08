@@ -17,8 +17,8 @@ public class UIBackpack : UIContainer
         _items = new List<UIItem>();
     }
 
-    public override void Initialize(Action onClick) {
-        base.Initialize(onClick);
+    public override void Initialize() {
+        base.Initialize();
 
         _cellPixelDimensions = new Vector2(_rect.rect.width / _dimensions.x, _rect.rect.height / _dimensions.y);
     }
@@ -83,12 +83,7 @@ public class UIBackpack : UIContainer
         }
         return null;
     }
-
-    public override bool HasItem()
-    {
-        return _items.Count > 0;
-    }
-
+        
     private void RemoveItem(UIItem item) {
         if(!_items.Contains(item))
             return;
@@ -123,8 +118,6 @@ public class UIBackpack : UIContainer
 
         int posX = Mathf.RoundToInt(item.transform.localPosition.x / _cellPixelDimensions.x + _dimensions.x / 2f - itemDimensions.x / 2f);
         int posY = Mathf.RoundToInt(-(item.transform.localPosition.y / _cellPixelDimensions.y - _dimensions.y / 2f + itemDimensions.y / 2f));
-
-        Debug.Log(posX + ", " + posY);
 
         for (int x = 0; x < itemDimensions.x; x++)
         {
@@ -163,6 +156,8 @@ public class UIBackpack : UIContainer
     }
 
     public override bool IsItemInside(UIItem item) {
+        if(item == null)
+            return RectTransformUtility.RectangleContainsScreenPoint(_rect, Input.mousePosition);
         return ContainsRect(_rect, item.GetRectTransform(), item._colliderMargins);
     }
 

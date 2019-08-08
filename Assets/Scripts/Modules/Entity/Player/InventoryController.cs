@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Modules.UI;
 
 namespace Modules.Entity.Player
 {
     public class InventoryController : MonoBehaviour
     {
         public ObtainableObject _obtainableObjectPrefab;
+
         public UIInventory _uiInventory;
         public int _size;
         public List<Item> _items;
@@ -42,12 +44,28 @@ namespace Modules.Entity.Player
 
         public void RemoveItem(Item item)
         {
-            Vector3 spawnPos = transform.position;
-            spawnPos.y = 0f;
-            ObtainableObject o = Instantiate(_obtainableObjectPrefab, spawnPos, Quaternion.identity);
+            _items.Remove(item);
+            Vector3 charPos = transform.position;
+            Vector3 dropPoint = transform.position;
+
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, 45f, LayerMask.GetMask("Terrain")))
+            {
+                Debug.Log("Dropping on mouse!");
+                charPos.y = hit.point.y;
+                dropPoint = charPos + (hit.point - charPos).normalized;
+            }
+            else {
+                dropPoint = charPos + transform.forward;
+                Debug.Log("Dropping forward!");
+                charPos.y = hit.point.y;
+                dropPoint = charPos + transform.forward;
+            }
+            dropPoint.y = 0;
+
+            ObtainableObject o = Instantiate(_obtainableObjectPrefab, dropPoint, Quaternion.identity);
             o._item = item;
-            
-            _items.Remove(item);   
         }
 
         public bool ContainsItem(Item item)

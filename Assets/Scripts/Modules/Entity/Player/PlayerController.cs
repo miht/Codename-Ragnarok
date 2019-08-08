@@ -9,10 +9,11 @@ using Modules.UI;
 namespace Modules.Entity.Player {
     public class PlayerController : MonoBehaviour
     {
+
         public float _speed = 5f;
         public float _acceleration = 1f;
-        private float _minimumMovementDistance = 0.5f;
-        private NavMeshAgent _navMeshAgent;
+        public float _movementDistanceThreshold = 0.5f;
+        private PlayerNavmeshAgent _agent;
 
         private InventoryController _inventoryController;
 
@@ -26,13 +27,14 @@ namespace Modules.Entity.Player {
         void Start()
         {
             _uiCanvas = GameObject.FindWithTag("Canvas").GetComponent<UIView>();
-            _navMeshAgent = GetComponent<NavMeshAgent>();
-            _navMeshAgent.speed = _speed;
-            _navMeshAgent.updateRotation = false;
-            _navMeshAgent.acceleration = _acceleration;
-            _minimumMovementDistance = _navMeshAgent.radius;
 
             _inventoryController = GetComponent<InventoryController>();
+
+            _agent = gameObject.AddComponent<PlayerNavmeshAgent>();
+            _agent.Setup();
+            _agent.SetSpeed(_speed);
+            _agent.SetAcceleration(_acceleration);
+            _agent.SetMovementDistanceThreshold(_movementDistanceThreshold);
         }
 
         // Update is called once per frame
@@ -50,15 +52,7 @@ namespace Modules.Entity.Player {
                     if (Physics.Raycast(ray, out hit, 45f, LayerMask.GetMask("Terrain")))
                     {
                         Transform objectHit = hit.transform;
-
-                        Vector3 distVector = hit.point - transform.position;
-                        distVector.y = 0;
-                        float distance = Vector3.Magnitude(distVector);
-                        if (distance >= _minimumMovementDistance)
-                        {
-                            _navMeshAgent.isStopped = false;
-                            _navMeshAgent.SetDestination(hit.point);
-                        }
+                        _agent.SetDestination(hit.point);
                     }
                 }
             }
@@ -71,39 +65,30 @@ namespace Modules.Entity.Player {
                 {
                     Transform targetableObjectHit = targetableHit.transform;
                     TargetableObject tarObj = targetableObjectHit.GetComponent<TargetableObject>();
-                    if (tarObj != null)
-                    {
-                        _navMeshAgent.isStopped = false;
-                        _navMeshAgent.SetDestination(targetableObjectHit.position);
-                        _target = tarObj;
-                    }
+                    _agent.SetTarget(tarObj, (tar) => Interact(tar));
                 }
             }
         }
 
-        void LateUpdate() {
-            if(_navMeshAgent.velocity.magnitude > Mathf.Epsilon) {
-                transform.rotation = Quaternion.LookRotation(_navMeshAgent.velocity.normalized);    
-            }
-        }
-
-        void OnTriggerEnter(Collider other) {
-            if (_target != null && _target == other.gameObject.GetComponent<TargetableObject>())
+        private void DropItem(Item item) {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, 45f, LayerMask.GetMask("Terrain")))
             {
-                _navMeshAgent.isStopped = true;
-                _target = null;
-
-                //Check if it was an item that we collided with
-                ObtainableObject obtObject = other.GetComponent<ObtainableObject>();
-                if(obtObject != null) {
-                    try {
-                        _inventoryController.AddItem(obtObject.GetItem());
-                        Destroy(other.gameObject);
-                    }
-                    catch (InventoryController.InventoryFullException) {
-                        //Animate the object or do something here
-                    }
-                }
+                Transform objectHit = hit.transform;
+                _agent.SetDestination(hit.point);
+            }
+        }
+        
+        private void Interact(TargetableObject obj) {
+            switch(obj.TargetableObjectType) {
+                case TargetableObject.TargetableObjectTypes.Obtainable:
+                    ObtainableObject obtObj = obj.GetComponent<ObtainableObject>();
+                    _inventoryController.AddItem(obtObj.GetItem());
+                    Destroy(obj.gameObject);
+                    break;
+                default:
+                    break;
             }
         }
     }
