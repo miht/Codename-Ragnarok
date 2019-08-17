@@ -20,6 +20,11 @@ public class UIEquipmentSlot : UISlot
         
     }
 
+    public override bool CanHostItem(UIItem item) {
+        bool canHost = item == null || item.GetItem()._uiEquippableType == _equippableType;
+        return base.CanHostItem(item) && canHost;
+    }
+
     public override void AddItem(UIItem item) {
         _backgroundImage.enabled = item == null;
         base.AddItem(item);

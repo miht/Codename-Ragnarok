@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class UISlot : UIContainer
 {
+
+    public UIItem.UIEquippableTypes _equippableType;
     private UIItem _item;
 
     // Start is called before the first frame update
@@ -43,6 +45,7 @@ public class UISlot : UIContainer
         UIItem item = _item;
         if (item != null)
         {
+            item.ResetPivot();
             item.SetDragged(true);
             item.transform.SetParent(item.transform.parent.parent);
         }

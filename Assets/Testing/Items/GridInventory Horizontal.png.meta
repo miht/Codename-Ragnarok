@@ -2,7 +2,7 @@ fileFormatVersion: 2
 guid: a8a6c8a6d6ee67e429290b7cdd8dd981
 TextureImporter:
   fileIDToRecycleName:
-    21300000: 15x7
+    21300000: 16x8
     21300002: 5x4
     21300004: 3x5
     21300006: 3x3
@@ -114,13 +114,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 15x7
+      name: 16x8
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 961
-        height: 448
+        width: 1024
+        height: 512
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -262,7 +262,7 @@ TextureImporter:
         width: 193
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

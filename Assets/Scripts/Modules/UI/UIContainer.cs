@@ -7,16 +7,17 @@ using UnityEngine.UI;
 public class UIContainer : MonoBehaviour
 {
     protected RectTransform _rect;
+    public Vector2 _pivot;
     // Start is called before the first frame update
 
     protected Button _button;
 
     public virtual void Start()
     {
-        _rect = GetComponent<RectTransform>();
     }
 
     public virtual void Initialize() {
+        _rect = GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
@@ -30,14 +31,13 @@ public class UIContainer : MonoBehaviour
         return null;
     }
 
-    public virtual bool IsItemInside(UIItem item) {
-        if(item == null)
-            return RectTransformUtility.RectangleContainsScreenPoint(_rect, Input.mousePosition);
-        return RectTransformUtility.RectangleContainsScreenPoint(_rect, item.transform.position);
+    public virtual bool CanHostItem(UIItem item) {
+        return RectTransformUtility.RectangleContainsScreenPoint(_rect, Input.mousePosition);
     }
 
     public virtual void AddItem(UIItem item) {
         //override in subclass
+        item.GetRectTransform().pivot = _pivot;
     }
 
     public virtual UIItem RemoveItem() {

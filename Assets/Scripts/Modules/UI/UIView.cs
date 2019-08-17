@@ -8,6 +8,7 @@ namespace Modules.UI
 {
     public class UIView : MonoBehaviour
     {
+        public RectTransform[] _panes;
         private RectTransform _rect;
 
         private bool _isFocused;
@@ -20,6 +21,10 @@ namespace Modules.UI
 
         void OnMouseEnter() {
             _isFocused = true;
+        }
+
+        public RectTransform[] GetPanes() {
+            return _panes;
         }
 
         void OnMouseExit() {

@@ -12,9 +12,12 @@ public class Armor : Equippable
         Finger
     }
 
-    public ArmorTypes _armorType;
+    protected ArmorTypes _armorType;
     public int _armorValue = 0;
 
+    void Start() {
+        base._equippableType = EquippableTypes.Armor;
+    }
     public ArmorTypes ArmorType {
         get { return _armorType; }
         set { _armorType = value; }

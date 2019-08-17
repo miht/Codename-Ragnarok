@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 using Modules.UI;
 
 namespace Modules.Entity.Player {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : Controller
     {
 
         public float _speed = 5f;
@@ -42,7 +42,7 @@ namespace Modules.Entity.Player {
         {
             if(Input.GetMouseButton(0)) { 
                 if(Input.GetMouseButtonDown(0)) {
-                    _isMouseValid = !EventSystem.current.IsPointerOverGameObject();
+                    _isMouseValid = !IsMouseOverUI();
                 }
 
                 if(_isMouseValid) {
@@ -57,7 +57,7 @@ namespace Modules.Entity.Player {
                 }
             }
 
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(0) && !_inventoryController.IsHoldingItem())
             {
                 RaycastHit targetableHit;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -83,9 +83,14 @@ namespace Modules.Entity.Player {
         private void Interact(TargetableObject obj) {
             switch(obj.TargetableObjectType) {
                 case TargetableObject.TargetableObjectTypes.Obtainable:
-                    ObtainableObject obtObj = obj.GetComponent<ObtainableObject>();
-                    _inventoryController.AddItem(obtObj.GetItem());
-                    Destroy(obj.gameObject);
+                    try {
+                        ObtainableObject obtObj = obj.GetComponent<ObtainableObject>();
+                        _inventoryController.AddItem(obtObj.GetItem());
+                        Destroy(obj.gameObject);
+                    }
+                    catch (InventoryController.InventoryFullException e) {
+                        //Trigger object animation here
+                    }
                     break;
                 default:
                     break;

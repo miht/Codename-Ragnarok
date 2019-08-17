@@ -1,11 +1,13 @@
 fileFormatVersion: 2
-guid: 2208f24a4604e9b438f0f6519b8ca79b
+guid: 5d3ccb516f4a33f45ae7eb7bc89fd8a1
 TextureImporter:
   fileIDToRecycleName:
-    21300000: 2x16
-    21300002: 2x15
-    21300004: 8x16
-    21300006: 8x15
+    21300000: Dish Placeholder Icon
+    21300002: item_concepts_0
+    21300004: Waist Placeholder Icon
+    21300006: Hands Placeholder Icon
+    21300008: Chest Placeholder Icon
+    21300010: Boots Placeholder Icon
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -110,73 +112,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 2x16
+      name: Dish Placeholder Icon
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 128
-        height: 1024
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6d17eea3feeaf4e4c84a5fcfbd0d67e7
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 2x15
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 128
-        height: 960
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 98c49cd6c507a3646b2af605bf739bd3
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 8x16
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 512
-        height: 1024
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3e40e14e4736ae0489853ab9d8b0f9df
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 8x15
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 512
-        height: 960
+        x: 3
+        y: 320
+        width: 192
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,7 +126,107 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b60bd7fcc35d40242b42ac1d1e30c20a
+      spriteID: 185c76f52ee3c8241a5d86afaccb3613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: item_concepts_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 320
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ead5316d1b3e40d4fa47ac733f3148b1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Waist Placeholder Icon
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 382
+        width: 192
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e946dc5e5b7a1ef40b1c40c5f62fc634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hands Placeholder Icon
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 257
+        width: 192
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62a0b6d55cb210f4fb1458d9078de121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chest Placeholder Icon
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 63
+        width: 192
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e4a1e30f56f3894391d5c021e061347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boots Placeholder Icon
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 57
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0ac29bcf1fb07b49a87dc1f88e7d041
       vertices: []
       indices: 
       edges: []
@@ -192,7 +234,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 63aab93d4dcd7a34286e1701d14d937e
+    spriteID: af491e22aaf3c5b498ffaa8baa005511
     vertices: []
     indices: 
     edges: []

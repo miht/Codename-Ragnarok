@@ -9,6 +9,10 @@ public class MeleeWeapon : Weapon {
 
     protected MeleeWeaponTypes _meleeWeaponType;
 
+    void Start() {
+        base._weaponType = WeaponTypes.Melee;
+    }
+
     [Range (0, 3f)]
     public float _range = 1.5f;
     [Range(0, 180)]

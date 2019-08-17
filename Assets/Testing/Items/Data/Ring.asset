@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Ring
   m_EditorClassIdentifier: 
   _name: Ring
+  _description: A ring is a round band, usually of metal, worn as ornamental jewellery.
   _id: -1
+  _uiEquippableType: 5
   _rarety: 2
   _uisprite: {fileID: 21300000, guid: 3583dfc7557595a40b1aacd06a9398ff, type: 3}
   _uiDimensions: {x: 1, y: 1}
-  _armorType: 5
   _armorValue: 15

@@ -3,6 +3,13 @@ using System.Collections.Generic;
 
 public class Item : Entity
 {
+    public enum ItemTypes {
+        Equippable,
+        Nonequippable
+    }
+
+    protected ItemTypes _itemType;
+    public UIItem.UIEquippableTypes _uiEquippableType;
     public enum RaretyTypes {
         Prevalent,
         Rare,
@@ -10,7 +17,14 @@ public class Item : Entity
         Legendary
     }
 
-    public static Dictionary<RaretyTypes, Color> _raretyColors = new Dictionary<RaretyTypes, Color> {
+    static Dictionary<RaretyTypes, int> _raretySpriteIndices = new Dictionary<RaretyTypes, int> {
+            {RaretyTypes.Prevalent,2},
+            {RaretyTypes.Rare, 3},
+            {RaretyTypes.Epic, 0},
+            {RaretyTypes.Legendary, 1}
+    };
+    
+    static Dictionary<RaretyTypes, Color> _raretyColors = new Dictionary<RaretyTypes, Color> {
         {RaretyTypes.Prevalent, new Color(1f, 1f, 1f)},
         {RaretyTypes.Rare, new Color(0f, 0f, 0.8f)},
         {RaretyTypes.Epic, new Color(0.6f, 0f, 1f)},
@@ -30,6 +44,16 @@ public class Item : Entity
     {
         get { return _uisprite; }
         set { _uisprite = value; }
+    }
+
+    public static Color GetRaretyColor(RaretyTypes raretyType)
+    {
+        return _raretyColors[raretyType];
+    }
+
+    public static Sprite GetRaretySprite(RaretyTypes raretyType) {
+        Sprite sprite = Resources.LoadAll<Sprite>("Sprites/Rune Icons")[_raretySpriteIndices[raretyType]];
+        return sprite;
     }
 
     public Vector2Int Dimensions

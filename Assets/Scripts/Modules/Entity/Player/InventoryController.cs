@@ -5,7 +5,7 @@ using Modules.UI;
 
 namespace Modules.Entity.Player
 {
-    public class InventoryController : MonoBehaviour
+    public class InventoryController : Controller
     {
         public ObtainableObject _obtainableObjectPrefab;
 
@@ -14,6 +14,8 @@ namespace Modules.Entity.Player
         public List<Item> _items;
 
         public float _pickupDistance = 0.5f;
+
+        public bool _isHoldingItem = false;
 
         private LayerMask _collectibleLayermask;
 
@@ -34,12 +36,25 @@ namespace Modules.Entity.Player
             try
             {
                 _items.Add(item);
-                _uiInventory.AddItem(item, RemoveItem);
+                _uiInventory.AddItem(item, GrabItem, ReleaseItem, RemoveItem);
             }
-            catch (ArgumentOutOfRangeException)
+            catch (InventoryFullException e)
             {
-                throw new InventoryFullException("Inventory is full.");
+                throw e;
             }
+        }
+
+        public void GrabItem() {
+            Debug.Log("Grabbed item!");
+            _isHoldingItem = true;
+        }
+
+        public bool IsHoldingItem() {
+            return _isHoldingItem;
+        }
+
+        public void ReleaseItem() {
+            _isHoldingItem = false;
         }
 
         public void RemoveItem(Item item)
@@ -52,13 +67,11 @@ namespace Modules.Entity.Player
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, 45f, LayerMask.GetMask("Terrain")))
             {
-                Debug.Log("Dropping on mouse!");
                 charPos.y = hit.point.y;
                 dropPoint = charPos + (hit.point - charPos).normalized;
             }
             else {
                 dropPoint = charPos + transform.forward;
-                Debug.Log("Dropping forward!");
                 charPos.y = hit.point.y;
                 dropPoint = charPos + transform.forward;
             }

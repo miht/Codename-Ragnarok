@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 2208f24a4604e9b438f0f6519b8ca79b
+guid: 50b22755f730f814fb51efa9216f1a08
 TextureImporter:
   fileIDToRecycleName:
-    21300000: 2x16
-    21300002: 2x15
-    21300004: 8x16
-    21300006: 8x15
+    21300000: Prevalent Icon
+    21300002: Rare Icon
+    21300004: Epic Icon
+    21300006: Legendary Icon
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -35,7 +35,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 1
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -49,7 +49,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 2x16
+      name: Prevalent Icon
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 0
-        width: 128
-        height: 1024
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,19 +124,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6d17eea3feeaf4e4c84a5fcfbd0d67e7
+      spriteID: e8c1ea99ed880574aaefa9f397c2c6c2
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2x15
+      name: Rare Icon
       rect:
         serializedVersion: 2
-        x: 0
+        x: 33
         y: 0
-        width: 128
-        height: 960
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,19 +144,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 98c49cd6c507a3646b2af605bf739bd3
+      spriteID: 518046d101a8b374b88e967fc0f530c0
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 8x16
+      name: Epic Icon
       rect:
         serializedVersion: 2
-        x: 0
+        x: 65
         y: 0
-        width: 512
-        height: 1024
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,27 +164,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3e40e14e4736ae0489853ab9d8b0f9df
+      spriteID: 0402a27ad439537449951b3b400247cb
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 8x15
+      name: Legendary Icon
       rect:
         serializedVersion: 2
-        x: 0
+        x: 96
         y: 0
-        width: 512
-        height: 960
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b60bd7fcc35d40242b42ac1d1e30c20a
+      spriteID: d2989adbd16cb80418ac3bca707ba39c
       vertices: []
       indices: 
       edges: []
@@ -192,7 +192,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 63aab93d4dcd7a34286e1701d14d937e
+    spriteID: 74649031cdd5da649b637aea1b5f60bc
     vertices: []
     indices: 
     edges: []

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Modules.Entity.Player;
 
 namespace Modules.UI
 {
@@ -10,7 +11,7 @@ namespace Modules.UI
     {
         public UIItem _uiItemPrefab;
 
-        public UIContainer[] _uiContainers;
+        private UIContainer[] _uiContainers;
 
         public UIBackpack _uiBackpack;
 
@@ -23,6 +24,8 @@ namespace Modules.UI
         void Start()
         {
             _rect = GetComponent<RectTransform>();
+
+            _uiContainers = GetComponentsInChildren<UIContainer>();
             foreach (UIContainer container in _uiContainers)
             {
                 container.Initialize();
@@ -39,6 +42,7 @@ namespace Modules.UI
             if (b_isItemOutside)
             {
                 _selectedItem.GetDropAction()();
+                _selectedItem.SetDragged(false);
                 Destroy(_selectedItem.gameObject);
                 _selectedItem = null;
                 b_isItemOutside = false;
@@ -47,7 +51,7 @@ namespace Modules.UI
 
             foreach (UIContainer container in _uiContainers)
             {
-                if (!container.IsItemInside(_selectedItem))
+                if (!container.CanHostItem(_selectedItem))
                     continue;
 
                 if (_selectedItem != null)
@@ -69,7 +73,7 @@ namespace Modules.UI
                 bool isInSlot = false;
                 foreach (UIContainer slot in _uiContainers)
                 {
-                    isInSlot |= slot.IsItemInside(_selectedItem);
+                    isInSlot |= slot.CanHostItem(_selectedItem);
                 }
 
                 b_isItemOutside = !RectTransformUtility.RectangleContainsScreenPoint(_rect, _selectedItem.transform.position);
@@ -87,14 +91,24 @@ namespace Modules.UI
             }
         }
 
-        public void AddItem(Item item, Action<Item> onDrop)
+        public void AddItem(Item item, Action OnGrab, Action OnRelease, Action<Item> onDrop)
         {
             //TODO: If equippable AND if slot is currently empty, equip straight away. Otherwise, add in bag
-            UIItem uiItem = Instantiate<UIItem>(_uiItemPrefab, transform);
-            uiItem.Initialize(item, () => {
-                onDrop(item);
-            });
-            _uiBackpack.AddItem(uiItem);
+            Vector2 position;
+            bool foundPosition = _uiBackpack.FindAvailablePosition(item._uiDimensions.x, item._uiDimensions.y, out position);
+            if(foundPosition) {
+                UIItem uiItem = Instantiate<UIItem>(_uiItemPrefab, transform);
+                uiItem.Initialize(item, transform.localScale, OnGrab, OnRelease, () =>
+                {
+                    onDrop(item);
+                    TooltipController.GetInstance().HideTooltip();
+                });
+                uiItem.SetDragged(false);
+                _uiBackpack.AddItem(uiItem, position);
+            } else {
+                throw new InventoryController.InventoryFullException("Inventory is full.");
+            }
+            
         }
 
         public void AddItemToBackpack(Item item)

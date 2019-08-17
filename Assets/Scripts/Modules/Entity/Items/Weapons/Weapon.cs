@@ -7,8 +7,12 @@ public class Weapon : Equippable
         Ranged
     }
 
-    public WeaponTypes _weaponType;
+    protected WeaponTypes _weaponType;
     public int _damageValue = 0;
+
+    public Weapon() {
+        base._equippableType = EquippableTypes.Weapon;
+    }
 
     public WeaponTypes WeaponType {
         get { return _weaponType; }

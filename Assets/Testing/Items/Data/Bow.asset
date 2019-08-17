@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 232b2d45aac32dd46a541460df62477b, type: 3}
   m_Name: Bow
   m_EditorClassIdentifier: 
-  _name: Bow
+  _name: Birch Bow
+  _description: a weapon for shooting arrows, typically made of a curved piece of
+    wood joined at both ends by a taut string.
   _id: -1
+  _uiEquippableType: 6
   _rarety: 3
   _uisprite: {fileID: 21300000, guid: ee53da6df6609484c97711a6b7ae0ae2, type: 3}
   _uiDimensions: {x: 3, y: 5}
-  _weaponType: 1
   _damageValue: 25
   _range: 12.8
